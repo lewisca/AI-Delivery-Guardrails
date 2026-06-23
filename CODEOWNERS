@@ -1,0 +1,18 @@
+# CODEOWNERS — auto-requests the right reviewer based on what a PR touches.
+# In a solo portfolio repo every path points at you; the value is showing that
+# review routing scales with blast radius. In a real org, the high-risk paths
+# below would point at senior engineers or a platform team, not the default owner.
+#
+# Replace @your-github-username before pushing.
+
+# Default owner for everything.
+*                       @your-github-username
+
+# High blast radius — schema and data access. Always an owner review.
+/migrations/            @your-github-username
+/src/db.js              @your-github-username
+
+# Pipeline and agent configuration — changes here change the guardrails themselves.
+/.github/               @your-github-username
+/.claude/               @your-github-username
+/CODEOWNERS             @your-github-username

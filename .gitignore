@@ -1,0 +1,13 @@
+node_modules/
+coverage/
+dist/
+*.log
+.DS_Store
+
+# Secrets — never committed. Commit .env.example instead.
+.env
+.env.*
+!.env.example
+
+# Personal, machine-local agent overrides (the committed .claude/settings.json is the team policy).
+.claude/settings.local.json

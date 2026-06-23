@@ -1,0 +1,48 @@
+name: CI Gate
+
+# The safety net. Runs on every PR and blocks merge on failure.
+# Wire these checks as REQUIRED status checks in branch protection so a PR
+# physically cannot merge until they are green.
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches: [main]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+
+    # A throwaway Postgres, created and destroyed per run. This is the ONLY
+    # database the pipeline ever sees. Migrations are proven against it without
+    # any risk to real data.
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: ci
+          POSTGRES_PASSWORD: ci
+          POSTGRES_DB: app_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      DATABASE_URL: postgres://ci:ci@localhost:5432/app_test
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build
+      - run: npm test
+      - run: npm run migrate   # applies migrations to the throwaway DB above
