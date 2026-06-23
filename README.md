@@ -1,2 +1,0 @@
-# AI-Delivery-Guardrails
-TBD
