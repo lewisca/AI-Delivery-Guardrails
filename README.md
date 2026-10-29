@@ -54,7 +54,9 @@ Browse the **pull requests** and **Actions** tabs. Each feature here was added t
 
 ## Adopting this in your organization
 
-The same shape drops onto any stack — define your commands once and the gate, the agent config, and the house rules all reference them. `docs/ADOPTION.md` covers the phased rollout and what would be tailored to a given team. `docs/PATTERN.md` explains the blast-radius model in full.
+The same shape drops onto any stack — define your commands once and the gate, the agent config, and the house rules all reference them. **You add the six guardrail files *around* your existing code; you don't change the application's design to adopt this.**
+
+Once the net is in place, a non-engineer can ship a safe-tier change without reading the code: describe the change in plain English to Claude Code, which follows `CLAUDE.md`, runs the tests, and opens a PR; CI gates it and `CODEOWNERS` routes review by blast radius. See **[docs/ADOPTION.md](docs/ADOPTION.md)** for how that works and the phased rollout; `docs/PATTERN.md` explains the blast-radius model in full.
 
 ## Quickstart
 
