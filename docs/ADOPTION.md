@@ -29,6 +29,9 @@ Fill in one table for your stack and the rest follows:
 
 Those commands go into three places that must agree: `CLAUDE.md` (so the agent uses them), `.claude/settings.json` (so it may run the safe ones unattended), and your CI workflow (so they gate every merge).
 
+For the hands-on, day-by-day version of standing up the pilot below — including the Day-0
+go/no-go checks — see **[WEEK-ONE.md](WEEK-ONE.md)**.
+
 ## A phased rollout
 
 1. **Foundation** — one team, one repo. Confirm dev/prod separation. Name one owner for the pipeline.
